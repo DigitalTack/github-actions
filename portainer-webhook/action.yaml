@@ -1,0 +1,14 @@
+name: 'Trigger Portainer Webhook'
+description: 'Triggers a Portainer webhook to deploy Docker Swarm'
+inputs:
+  webhook-url:
+    description: 'The Portainer webhook URL'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Call Portainer Webhook
+      shell: bash
+      run: |
+        curl -X POST "${{ inputs.webhook-url }}"
